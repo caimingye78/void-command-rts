@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#020812" />
+    <title>VOID COMMAND // Three.js Space RTS</title>
+  </head>
+  <body>
+    <div id="app">
+      <div id="viewport"></div>
+      <div class="scanlines"></div>
+      <div class="vignette"></div>
+
+      <header class="topbar glass">
+        <div class="brand">
+          <span class="brand-mark">VC</span>
+          <div>
+            <strong>VOID COMMAND</strong>
+            <small id="sector-label">PROCEDURAL SKIRMISH // SECTOR H-177</small>
+          </div>
+        </div>
+        <div class="telemetry">
+          <div><small>FLEET</small><b id="fleet-value">0</b></div>
+          <div><small>HOSTILES</small><b id="hostile-value">0</b></div>
+          <div><small>RU</small><b id="resource-value">3,800</b></div>
+          <div><small>SIM</small><b id="sim-value">1×</b></div>
+        </div>
+        <div class="top-actions">
+          <button id="new-battle-btn" class="hud-button">NEW SECTOR</button>
+          <button id="cinematic-btn" class="hud-button">CINEMATIC</button>
+          <button id="pause-btn" class="hud-button">PAUSE</button>
+        </div>
+      </header>
+
+      <aside class="left-panel glass">
+        <div class="panel-heading"><span>TACTICAL FEED</span><i></i></div>
+        <div id="objective" class="objective">
+          <small>PRIMARY DIRECTIVE</small>
+          <strong>Eliminate hostile fleet</strong>
+          <p>Use capital ships to anchor the formation while strike craft flank exposed targets.</p>
+        </div>
+        <div class="separator"></div>
+        <div class="controls-list">
+          <div><kbd>LMB</kbd><span>Select / box select</span></div>
+          <div><kbd>RMB</kbd><span>Move / attack</span></div>
+          <div><kbd>MMB</kbd><span>Orbit camera</span></div>
+          <div><kbd>WASD</kbd><span>Pan tactical view</span></div>
+          <div><kbd>Q / E</kbd><span>Camera elevation</span></div>
+          <div><kbd>F</kbd><span>Focus selection</span></div>
+          <div><kbd>SPACE</kbd><span>Pause simulation</span></div>
+        </div>
+        <div class="separator"></div>
+        <div class="panel-heading compact"><span>EVENT LOG</span><i></i></div>
+        <div id="event-log" class="event-log"></div>
+      </aside>
+
+      <aside class="right-panel glass">
+        <div class="panel-heading"><span>FLEET MANIFEST</span><i></i></div>
+        <div id="fleet-list" class="fleet-list"></div>
+        <div class="separator"></div>
+        <div class="panel-heading compact"><span>SENSOR MAP</span><i></i></div>
+        <canvas id="minimap" width="280" height="200"></canvas>
+        <div class="legend">
+          <span><i class="dot ally"></i>Allied</span>
+          <span><i class="dot enemy"></i>Hostile</span>
+          <span><i class="dot objective"></i>Objective</span>
+        </div>
+      </aside>
+
+      <section id="selection-panel" class="selection-panel glass hidden">
+        <div class="selection-portrait">
+          <div class="ship-glyph"></div>
+          <span id="selection-count">01</span>
+        </div>
+        <div class="selection-info">
+          <small id="selection-class">DESTROYER GROUP</small>
+          <strong id="selection-name">VCS Aegis Wing</strong>
+          <div class="bars">
+            <label>HULL <span id="hull-value">100%</span></label>
+            <div class="bar"><i id="hull-bar" style="width:100%"></i></div>
+            <label>SHIELD <span id="shield-value">100%</span></label>
+            <div class="bar shield"><i id="shield-bar" style="width:100%"></i></div>
+          </div>
+        </div>
+        <div class="command-grid">
+          <button data-command="move"><span>M</span><small>MOVE</small></button>
+          <button data-command="attack"><span>A</span><small>ATTACK</small></button>
+          <button data-command="guard"><span>G</span><small>GUARD</small></button>
+          <button data-command="stop"><span>S</span><small>STOP</small></button>
+          <button data-command="formation"><span>F</span><small>FORMATION</small></button>
+          <button data-command="focus"><span>◈</span><small>FOCUS</small></button>
+        </div>
+      </section>
+
+      <div id="selection-box"></div>
+      <div id="order-reticle"><i></i><i></i><i></i><i></i></div>
+      <div id="tooltip" class="tooltip"></div>
+      <div id="toast" class="toast">SYSTEM ONLINE</div>
+      <div id="loading" class="loading-screen">
+        <div class="loader-ring"></div>
+        <strong>INITIALIZING BATTLESPACE</strong>
+        <small>GENERATING SHIPS // COMPILING SHADERS // MAPPING GRAVITY WELLS</small>
+      </div>
+    </div>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.179.1/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
